@@ -28,6 +28,6 @@ public class Shield {
     
     @Override 
     public String toString(){
-        return "W[" + this.protection + "," + this.uses + "]";
+        return "S[" + this.protection + "," + this.uses + "]";
     }
 }

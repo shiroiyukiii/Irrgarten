@@ -8,7 +8,7 @@ package irrgarten;
  *
  * @author usuario
  */
-public class Irrgarten {
+public class TestP1 {
 
     /**
      * @param args the command line arguments
