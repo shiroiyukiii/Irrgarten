@@ -16,7 +16,7 @@ public class Weapon {
     public double attack() {
         if (uses > 0) {
             uses--;
-            return this.power;
+            return power;
         }
         
         return 0;
@@ -24,6 +24,6 @@ public class Weapon {
     
     @Override 
     public String toString(){
-        return "W[" + this.power + "," + this.uses + "]";
+        return "W[" + power + "," + uses + "]";
     }
 }

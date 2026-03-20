@@ -13,41 +13,41 @@ public class GameState {
     private String players;
     private String monsters;
     private int currentPlayer;
-    private int winner;
+    private boolean winner;
     private String log;
     
     
     GameState(String _labyrinth, String _players, String _monsters, 
-                int _currentPlayer, int _winner, String _log) {
-        this.labyrinth = _labyrinth;
-        this.players = _players;
-        this.monsters = _monsters;
-        this.currentPlayer = _currentPlayer;
-        this.winner = _winner;
-        this.log = _log;
+                int _currentPlayer, boolean _winner, String _log) {
+        labyrinth = _labyrinth;
+        players = _players;
+        monsters = _monsters;
+        currentPlayer = _currentPlayer;
+        winner = _winner;
+        log = _log;
     }
     
     public String getLabyrinth(){
-        return this.labyrinth;
+        return labyrinth;
     }
     
     public String getPlayers(){
-        return this.players;
+        return players;
     }
     
     public String getMonsters(){
-        return this.monsters;
+        return monsters;
     }
     
     public int getCurrentPLayer(){
-        return this.currentPlayer;
+        return currentPlayer;
     }
     
-    public int getWinner(){
-        return this.winner;
+    public boolean getWinner(){
+        return winner;
     }
     
     public String getLog(){
-        return this.log;
+        return log;
     }
 }

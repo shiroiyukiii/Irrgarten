@@ -20,7 +20,7 @@ public class Shield {
     public double protect() {
         if (uses > 0) {
             uses--;
-            return this.protection;
+            return protection;
         }
         
         return 0;
@@ -28,6 +28,6 @@ public class Shield {
     
     @Override 
     public String toString(){
-        return "S[" + this.protection + "," + this.uses + "]";
+        return "S[" + protection + "," + uses + "]";
     }
 }

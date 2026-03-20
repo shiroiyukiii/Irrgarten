@@ -4,6 +4,8 @@
  */
 package irrgarten;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Víctor
@@ -25,7 +27,7 @@ public class Labyrinth {
         throw new UnsupportedOperationException();
     }
     
-    public void spreadPlayers(Player[] players) {
+    public void spreadPlayers(ArrayList<Player> players) {
         throw new UnsupportedOperationException();
     }
     
