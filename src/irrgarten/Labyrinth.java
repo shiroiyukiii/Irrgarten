@@ -20,9 +20,9 @@ public class Labyrinth {
     static private final int ROW = 0;
     static private final int COL = 1;
     
-    private Monster[][] monster_grid;
-    private Player[][] player_grid;
-    private char[][] labyrinth_grid;
+    private Monster[][] monsterGrid;
+    private Player[][] playerGrid;
+    private char[][] labyrinthGrid;
     private int nRows;
     private int nCols;
     private int exitRow;
@@ -33,30 +33,30 @@ public class Labyrinth {
         nCols = _nCols;
         exitRow = _exitRow;
         exitCol = _exitCol;
-        monster_grid = new Monster[nRows][nCols];
-        player_grid = new Player[nRows][nCols];
-        labyrinth_grid = new char[nRows][nCols];
+        monsterGrid = new Monster[nRows][nCols];
+        playerGrid = new Player[nRows][nCols];
+        labyrinthGrid = new char[nRows][nCols];
         
         // Llenamos el array laberinto
         for (int i = 0; i < nRows; i++) {
-            Arrays.fill(labyrinth_grid, EMPTY_CHAR);
+            Arrays.fill(labyrinthGrid[i], EMPTY_CHAR);
         }
         
         
         // Ponemos las paredes
-        labyrinth_grid[0][0] = BLOCK_CHAR;
+        labyrinthGrid[0][0] = BLOCK_CHAR;
         /*
         for (int i = 0; i < nRows - 1; i++) {
-           labyrinth_grid[Dice.randomPos(nRows)][Dice.randomPos(nCols)] 
+           labyrinthGrid[Dice.randomPos(nRows)][Dice.randomPos(nCols)] 
                    = BLOCK_CHAR; 
         }
         */
         
         // Poniendo un monstruo y la salida
-        monster_grid[nRows - 2][nCols - 1] = new Monster("EC", 
+        monsterGrid[nRows - 2][nCols - 1] = new Monster("EC", 
                 Dice.randomIntelligence(), Dice.randomStrength());
-        labyrinth_grid[nRows - 2][nCols - 1] = MONSTER_CHAR;
-        labyrinth_grid[exitRow][exitCol] = EXIT_CHAR;
+        labyrinthGrid[nRows - 2][nCols - 1] = MONSTER_CHAR;
+        labyrinthGrid[exitRow][exitCol] = EXIT_CHAR;
     }
     
     public void spreadPlayers(ArrayList<Player> players) {
@@ -64,7 +64,7 @@ public class Labyrinth {
     }
     
     public boolean haveAWinner() {
-        return player_grid[exitRow][exitCol] != null;
+        return playerGrid[exitRow][exitCol] != null;
     }
     
     public String toString() {
@@ -80,7 +80,7 @@ public class Labyrinth {
         for (int i = 0; i < nRows; i++) {
             labyrinth_str += BORDER_LR_CHAR + ' ';
             for (int j = 0; i < nCols; j++) {
-                labyrinth_str += (labyrinth_grid[i][j] + " ");
+                labyrinth_str += (labyrinthGrid[i][j] + " ");
             }
             labyrinth_str += BORDER_LR_CHAR + '\n';
         }
@@ -94,8 +94,8 @@ public class Labyrinth {
     public void addMonster(int row, int col, Monster monster) {
         // Comprobamos que este dentro del tablero y que este vacía
         if (posOK(row, col) && emptyPos(row, col)) {
-            labyrinth_grid[row][col] = MONSTER_CHAR;
-            monster_grid[row][col] = monster;
+            labyrinthGrid[row][col] = MONSTER_CHAR;
+            monsterGrid[row][col] = monster;
             monster.setPos(row, col);
         }
     }
@@ -118,19 +118,19 @@ public class Labyrinth {
     }
     
     private boolean emptyPos(int row, int col) {
-        return labyrinth_grid[row][col] == EMPTY_CHAR;
+        return labyrinthGrid[row][col] == EMPTY_CHAR;
     }
     
     private boolean monsterPos(int row, int col) {
-        return labyrinth_grid[row][col] == MONSTER_CHAR;
+        return labyrinthGrid[row][col] == MONSTER_CHAR;
     }
     
     private boolean exitPos(int row, int col) {
-        return labyrinth_grid[row][col] == EXIT_CHAR;
+        return labyrinthGrid[row][col] == EXIT_CHAR;
     }
     
     private boolean combatPos(int row, int col) {
-       return labyrinth_grid[row][col] == COMBAT_CHAR;
+       return labyrinthGrid[row][col] == COMBAT_CHAR;
     }
     
     private boolean canStepOn(int row, int col) {
@@ -141,9 +141,9 @@ public class Labyrinth {
     private void updateOldPos(int row, int col) {
         if (posOK(row, col)) {
             if (combatPos(row, col))
-                labyrinth_grid[row][col] = MONSTER_CHAR;
+                labyrinthGrid[row][col] = MONSTER_CHAR;
             else
-                labyrinth_grid[row][col] = EMPTY_CHAR;
+                labyrinthGrid[row][col] = EMPTY_CHAR;
         }
     }
     
