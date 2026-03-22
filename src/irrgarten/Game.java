@@ -63,8 +63,8 @@ public class Game {
     private void configureLabyrinth(){
         labyrinth.addBlock(Orientation.VERTICAL, 10, 9, 9);
         
-        Monster topologia = new Monster("Topologia", 10.0f, 10.0f);
-        monsters.add(topologia);
+        Monster topologia = new Monster("Topologia", 10.0f, 10.0f); 
+        monsters.add(topologia); // El monstruo es T2 (?)
         labyrinth.addMonster(5, 5, topologia);
     }
     

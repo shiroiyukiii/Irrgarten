@@ -10,37 +10,48 @@ package irrgarten;
  */
 public class Monster {
     private static final int INITIAL_HEALTH = 5;
+    private static final int OUT_OF_BOUNDS = -1;
     private String name;
     private float intelligence;
+    private float strength;
     private float health;
     private int row;
     private int col;
     
-    public Monster(String name, float intelligence, float strength) {
-        throw new UnsupportedOperationException();
+    public Monster(String _name, float _intelligence, float _strength) {
+        health = INITIAL_HEALTH;
+        row = OUT_OF_BOUNDS;
+        col = OUT_OF_BOUNDS;
+        
+        name = _name;
+        intelligence = _intelligence;
+        strength = _strength;
     }
     
     public boolean dead() {
-        throw new UnsupportedOperationException();
+        return health <= 0;
     }
     
     public float attack() {
-        throw new UnsupportedOperationException();
+        return Dice.intensity(strength);
     }
     
     public boolean defend(float receivedAttack) {
-        throw new UnsupportedOperationException();
+        gotWounded();
+        return false;
     }
     
-    public void setPos(int row, int col) {
-        throw new UnsupportedOperationException();
+    public void setPos(int _row, int _col) {
+        row = _row;
+        col = _col;
     }
     
     public String toString() {
-        throw new UnsupportedOperationException();
+       return String.format("M[%s, %f, %f, %s, %d, %d]", name, intelligence,
+            strength, health, row, col);
     }
     
-    public void gotWounded() {
-        throw new UnsupportedOperationException();
+    private void gotWounded() {
+        --health;
     }
 }
