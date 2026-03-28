@@ -37,8 +37,15 @@ public class Monster {
     }
     
     public boolean defend(float receivedAttack) {
-        gotWounded();
-        return false;
+        boolean isDead = dead();
+        if(!isDead) {
+            if (Dice.intensity(intelligence) < receivedAttack) {
+                gotWounded();
+                isDead = dead();
+            }
+        }      
+        
+        return isDead;
     }
     
     public void setPos(int _row, int _col) {

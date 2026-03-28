@@ -20,9 +20,9 @@ public class Labyrinth {
     static private final int ROW = 0;
     static private final int COL = 1;
     
-    private Monster[][] monsterGrid;
-    private Player[][] playerGrid;
-    private char[][] labyrinthGrid;
+    private Monster[][] monsters;
+    private Player[][] players;
+    private char[][] labyrinth;
     private int nRows;
     private int nCols;
     private int exitRow;
@@ -33,38 +33,32 @@ public class Labyrinth {
         nCols = _nCols;
         exitRow = _exitRow;
         exitCol = _exitCol;
-        monsterGrid = new Monster[nRows][nCols];
-        playerGrid = new Player[nRows][nCols];
-        labyrinthGrid = new char[nRows][nCols];
+        monsters = new Monster[nRows][nCols];
+        players = new Player[nRows][nCols];
+        labyrinth = new char[nRows][nCols];
         
         // Llenamos el array laberinto
         for (int i = 0; i < nRows; i++) {
-            Arrays.fill(labyrinthGrid[i], EMPTY_CHAR);
+            Arrays.fill(labyrinth[i], EMPTY_CHAR);
         }
-        
-        
-        // Ponemos las paredes
-        labyrinthGrid[0][0] = BLOCK_CHAR;
         /*
         for (int i = 0; i < nRows - 1; i++) {
-           labyrinthGrid[Dice.randomPos(nRows)][Dice.randomPos(nCols)] 
+           labyrinth[Dice.randomPos(nRows)][Dice.randomPos(nCols)] 
                    = BLOCK_CHAR; 
         }
         */
-        
-        // Poniendo un monstruo y la salida
-        monsterGrid[nRows - 2][nCols - 1] = new Monster("EC", 
-                Dice.randomIntelligence(), Dice.randomStrength());
-        labyrinthGrid[nRows - 2][nCols - 1] = MONSTER_CHAR;
-        labyrinthGrid[exitRow][exitCol] = EXIT_CHAR;
+        labyrinth[exitRow][exitCol] = EXIT_CHAR;
     }
     
-    public void spreadPlayers(ArrayList<Player> players) {
-        throw new UnsupportedOperationException();
+    public void spreadPlayers(ArrayList<Player> _players) {
+       for (Player p : _players) {
+           int[] pos = randomEmptyPos();
+           putPlayer2D(-1, -1, pos[ROW], pos[COL], p);
+       }
     }
     
     public boolean haveAWinner() {
-        return playerGrid[exitRow][exitCol] != null;
+        return players[exitRow][exitCol] != null;
     }
     
     public String toString() {
@@ -80,7 +74,7 @@ public class Labyrinth {
         for (int i = 0; i < nRows; i++) {
             labyrinth_str += BORDER_LR_CHAR + ' ';
             for (int j = 0; i < nCols; j++) {
-                labyrinth_str += (labyrinthGrid[i][j] + " ");
+                labyrinth_str += (labyrinth[i][j] + " ");
             }
             labyrinth_str += BORDER_LR_CHAR + '\n';
         }
@@ -94,23 +88,52 @@ public class Labyrinth {
     public void addMonster(int row, int col, Monster monster) {
         // Comprobamos que este dentro del tablero y que este vacía
         if (posOK(row, col) && emptyPos(row, col)) {
-            labyrinthGrid[row][col] = MONSTER_CHAR;
-            monsterGrid[row][col] = monster;
+            labyrinth[row][col] = MONSTER_CHAR;
+            monsters[row][col] = monster;
             monster.setPos(row, col);
         }
     }
     
+    // Establece la nueva posición en la que se colocará el jugador
     public Monster putPlayer(Directions direction, Player player) {
-        throw new UnsupportedOperationException();
+        int oldRow = player.getRow();
+        int oldCol = player.getCol();
+        int[] newPos = dir2Pos(oldRow, oldCol, direction);
+        return putPlayer2D(oldRow, oldCol, newPos[ROW], newPos[COL], player);
     }
     
     public void addBlock(Orientation orientation, int startRow, 
             int startCol, int length) {
-        throw new UnsupportedOperationException();
+        int incCol = (orientation == Orientation.VERTICAL ? 1 : 0);
+        int incRow = (orientation == Orientation.VERTICAL ? 0 : 1);
+        int row = startRow;
+        int col = startCol;
+        
+        while (posOK(row, col) && emptyPos(row, col) && (length > 0)) {
+            labyrinth[row][col] = BLOCK_CHAR;
+            length--;
+            row += incRow;
+            row += incCol;
+        }
     }
     
-    public Directions[] validMoves(int row, int col) {
-        throw new UnsupportedOperationException();
+    public ArrayList<Directions> validMoves(int row, int col) {
+        ArrayList<Directions> output = new ArrayList(4);
+        
+        if (canStepOn(row+1, col)) {
+            output.add(Directions.DOWN);
+        }
+        if (canStepOn(row-1, col)) {
+            output.add(Directions.UP);
+        }
+        if (canStepOn(row, col+1)) {
+            output.add(Directions.RIGHT);
+        }
+        if (canStepOn(row, col-1)) {
+            output.add(Directions.LEFT);
+        }
+        
+        return output;
     }
     
     private boolean posOK(int row, int col) {
@@ -118,19 +141,19 @@ public class Labyrinth {
     }
     
     private boolean emptyPos(int row, int col) {
-        return labyrinthGrid[row][col] == EMPTY_CHAR;
+        return labyrinth[row][col] == EMPTY_CHAR;
     }
     
     private boolean monsterPos(int row, int col) {
-        return labyrinthGrid[row][col] == MONSTER_CHAR;
+        return labyrinth[row][col] == MONSTER_CHAR;
     }
     
     private boolean exitPos(int row, int col) {
-        return labyrinthGrid[row][col] == EXIT_CHAR;
+        return labyrinth[row][col] == EXIT_CHAR;
     }
     
     private boolean combatPos(int row, int col) {
-       return labyrinthGrid[row][col] == COMBAT_CHAR;
+       return labyrinth[row][col] == COMBAT_CHAR;
     }
     
     private boolean canStepOn(int row, int col) {
@@ -141,9 +164,9 @@ public class Labyrinth {
     private void updateOldPos(int row, int col) {
         if (posOK(row, col)) {
             if (combatPos(row, col))
-                labyrinthGrid[row][col] = MONSTER_CHAR;
+                labyrinth[row][col] = MONSTER_CHAR;
             else
-                labyrinthGrid[row][col] = EMPTY_CHAR;
+                labyrinth[row][col] = EMPTY_CHAR;
         }
     }
     
@@ -170,13 +193,35 @@ public class Labyrinth {
     private int[] randomEmptyPos() {
         while (true) {
             int[] pos = {Dice.randomPos(nRows), Dice.randomPos(nCols)};
-            if (emptyPos(pos[ROW], pos[COL]))
+            if (posOK(pos[ROW], pos[COL]) && emptyPos(pos[ROW], pos[COL]))
                 return pos;
         }
     }
     
     private Monster putPlayer2D(int oldRow, int oldCol, int row, 
             int col, Player player) {
-        throw new UnsupportedOperationException();
+        Monster monster = null;
+        if (canStepOn(row, col)) {
+            if (posOK(oldRow, oldCol)) {
+                Player p = players[oldRow][oldCol];
+                if (p == player) {
+                    updateOldPos(oldRow, oldCol);
+                    players[oldRow][oldCol] = null;
+                }
+            }
+            
+            if(monsterPos(row, col)) {
+                labyrinth[row][col] = COMBAT_CHAR;
+                monster = monsters[row][col];
+            }
+            else {
+                labyrinth[row][col] = player.getNumber();
+            }
+            
+            players[row][col] = player;
+            player.setPos(row, col);
+        }
+        
+        return monster;
     }
 }

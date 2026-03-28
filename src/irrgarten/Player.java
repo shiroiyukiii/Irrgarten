@@ -41,6 +41,19 @@ public class Player {
         consecutiveHits = 0;
     }
     
+    // La clase Labyrinth necesita saber varios atributos de Player
+    public char getNumber() {
+        return number;
+    }
+    
+    public int getRow() {
+        return row;
+    }
+    
+    public int getCol() {
+        return col;
+    }
+    
     public void setPos(int row, int col){
         row = row;
         col = col;
