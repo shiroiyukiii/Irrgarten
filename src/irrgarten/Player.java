@@ -28,10 +28,10 @@ public class Player {
     private int col;
     private int consecutiveHits = 0;
     
-    Player(char number, float intelligence, float strength){
-        number = number;
-        intelligence = intelligence;
-        strength = strength;        
+    Player(char _number, float _intelligence, float _strength){
+        number = _number;
+        intelligence = _intelligence;
+        strength = _strength;        
     }
     
     public void resurrect(){
@@ -41,9 +41,9 @@ public class Player {
         consecutiveHits = 0;
     }
     
-    public void setPos(int row, int col){
-        row = row;
-        col = col;
+    public void setPos(int _row, int _col){
+        row = _row;
+        col = _col;
     }
     
     public boolean dead(){
@@ -56,6 +56,14 @@ public class Player {
     
     public float defend(float receivedAttack){
         return manageHit();
+    }
+    
+    public int getRow(){
+        return row;
+    }
+    
+    public int getCol(){
+        return col;
     }
     
     public String toString(){

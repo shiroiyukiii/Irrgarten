@@ -12,7 +12,7 @@ public class Game {
     private ArrayList<Player> players;
     private ArrayList<Monster> monsters;
     
-    private Player currentPLayer;
+    private Player currentPlayer;
     private Labyrinth labyrinth;
     
     private int currentPlayerIndex;
@@ -71,6 +71,15 @@ public class Game {
     private void nextPLayer(){
         currentPLayer = players.get(currentPlayerIndex++);
         currentPlayerIndex++;
+    }
+    
+    private Directions actualDirection(Direction preferredDirection){
+        int currentRow = currentPlayer.getRow();
+        int currentCol = currentPlayer.getCol();
+        
+        Directions[] validMoves = labyrinth.validMoves(currentRow, currentCol);
+        
+        
     }
     
     private void logPlayerWon(){
