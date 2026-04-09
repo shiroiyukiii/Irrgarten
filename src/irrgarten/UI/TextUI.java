@@ -14,7 +14,7 @@ public class TextUI {
         String s = in.nextLine();     
         return s.charAt(0);
     }
-    
+
 
     public Directions nextMove() {
         System.out.print("Where? ");
@@ -50,7 +50,28 @@ public class TextUI {
         return direction;
     }
     
-    public void showGame(GameState gameState) {   
+    public void showGame(GameState gameState) {     
+        System.out.println("\n========================================");
+        System.out.println("            IRRGARTEN                   ");
+        System.out.println("========================================\n");
+
+        System.out.println(gameState.getLabyrinth());
+
+        System.out.println("\n--- JUGADORES ---");
+        System.out.println(gameState.getPlayers());
+
+        System.out.println("\n--- MONSTRUOS ---");
+        System.out.println(gameState.getMonsters());
+
+        System.out.println("\nTurno del Jugador: " + gameState.getCurrentPlayer());
+
+        System.out.println("\n--- DIARIO DE COMBATE ---");
+        System.out.println(gameState.getLog());
+
+        if (gameState.getWinner()) {
+            System.out.println("\n ¡TENEMOS UN GANADOR! EL JUEGO HA TERMINADO");
+        }
     }
-    
 }
+
+    

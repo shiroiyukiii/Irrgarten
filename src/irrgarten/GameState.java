@@ -39,7 +39,7 @@ public class GameState {
         return monsters;
     }
     
-    public int getCurrentPLayer(){
+    public int getCurrentPlayer(){
         return currentPlayer;
     }
     

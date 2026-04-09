@@ -31,7 +31,7 @@ public class Game {
         }
         
         currentPlayerIndex = Dice.whoStarts(nPlayers);
-        currentPLayer = players.get(currentPlayerIndex);
+        currentPlayer = players.get(currentPlayerIndex);
         
         labyrinth = new Labyrinth(10, 10, 9, 9);
         
@@ -42,6 +42,43 @@ public class Game {
     
     public boolean finished(){
         return labyrinth.haveAWinner();
+    }
+    
+    public boolean nextStep(Directions preferredDirection){
+        String log = "";
+        
+        boolean dead = currentPlayer.dead();
+        
+        if(!dead){
+            Directions direction = actualDirection(preferredDirection);
+            
+            if(direction != preferredDirection){
+                logPlayerNoOrders();
+            }
+            
+            Monster monster = labyrinth.putPlayer(direction, currentPlayer);
+            
+            if(monster == null){
+                logNoMonster();
+            }
+            
+            else{
+                GameCharacter winner = combat(monster);
+                manageReward(winner);
+            }
+        }
+        
+        else {
+            manageResurrection();
+        }
+        
+        boolean endGame = finished();
+        
+        if(!endGame){
+            nextPlayer();
+        }
+        
+        return endGame;
     }
     
     public GameState getGameState(){
@@ -63,23 +100,74 @@ public class Game {
     private void configureLabyrinth(){
         labyrinth.addBlock(Orientation.VERTICAL, 10, 9, 9);
         
-        Monster topologia = new Monster("Topologia", 10.0f, 10.0f);
-        monsters.add(topologia);
+        Monster topologia = new Monster("Topologia", 10.0f, 10.0f); 
+        monsters.add(topologia); // El monstruo es T2 (?)
         labyrinth.addMonster(5, 5, topologia);
     }
     
-    private void nextPLayer(){
-        currentPLayer = players.get(currentPlayerIndex++);
+    private void nextPlayer(){
+        currentPlayer = players.get(currentPlayerIndex++);
         currentPlayerIndex++;
     }
     
-    private Directions actualDirection(Direction preferredDirection){
+    private Directions actualDirection(Directions preferredDirection){
         int currentRow = currentPlayer.getRow();
         int currentCol = currentPlayer.getCol();
         
-        Directions[] validMoves = labyrinth.validMoves(currentRow, currentCol);
+        ArrayList<Directions> validMoves = labyrinth.validMoves(currentRow, currentCol);
         
+        Directions output = currentPlayer.move(preferredDirection, validMoves);
         
+        return output;
+    }
+    
+    private GameCharacter combat(Monster monster){
+        int rounds = 0;
+        GameCharacter winner = GameCharacter.PLAYER;
+        
+        float playerAttack = currentPlayer.attack();
+        boolean lose = monster.defend(playerAttack);
+        
+        while((!lose)&&(rounds<MAX_ROUNDS)){
+            winner = GameCharacter.MONSTER;
+            rounds++;
+            
+            float monsterAttack = monster.attack();
+            lose = currentPlayer.defend(monsterAttack);
+            
+            if(!lose){
+                playerAttack = currentPlayer.attack();
+                winner = GameCharacter.PLAYER;
+                lose = monster.defend(playerAttack);
+            }
+        }
+        
+        logRounds(rounds, MAX_ROUNDS);
+        
+        return winner;
+    }
+    private void manageReward(GameCharacter winner){
+        if(winner == GameCharacter.PLAYER){
+            currentPlayer.receiveReward();
+            logPlayerWon();
+        }
+        
+        else {
+            logMonsterWon();
+        }
+    }
+    
+    private void manageResurrection(){
+        boolean resurrect = Dice.resurrectPlayer();
+        
+        if(resurrect) {
+            currentPlayer.resurrect();
+            logResurrected();
+        }
+        
+        else {
+            logPlayerSkipTurn();
+        }
     }
     
     private void logPlayerWon(){
@@ -107,8 +195,8 @@ public class Game {
                 + "le ha sido posible moverse.\n";
     }
     
-    private void logRounds(){
-        log += "Se han producido el maximo de rondas de combate de "
+    private void logRounds(int rounds, int max){
+        log += "Se han producido " + rounds + "rondas en el combate de un maximo de "
                     + MAX_ROUNDS;
                 }
 }
