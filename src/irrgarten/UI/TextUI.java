@@ -69,7 +69,8 @@ public class TextUI {
         System.out.println(gameState.getLog());
 
         if (gameState.getWinner()) {
-            System.out.println("\n ¡TENEMOS UN GANADOR! EL JUEGO HA TERMINADO");
+            System.out.println("\n --- GANADOR --- ");
+            System.out.println(gameState.getWinner());
         }
     }
 }

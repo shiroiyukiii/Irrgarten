@@ -146,6 +146,7 @@ public class Game {
         
         return winner;
     }
+    
     private void manageReward(GameCharacter winner){
         if(winner == GameCharacter.PLAYER){
             currentPlayer.receiveReward();
