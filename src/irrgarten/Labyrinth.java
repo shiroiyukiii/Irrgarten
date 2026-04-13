@@ -63,24 +63,27 @@ public class Labyrinth {
     
     public String toString() {
         final char BORDER_LR_CHAR = '|';
-        final char BORDER_UD_CHAR = '_';
-        final String UD_BORDER = " " + String.format("%"+(nCols * 2 + 1)+"s")
-                .replace(' ', BORDER_UD_CHAR) + " \n";
+        final char BORDER_U_CHAR = '_';
+        final char BORDER_D_CHAR = '‾';
+        final String U_BORDER = " " + String.format("%"+(nCols * 2 + 1)+"s", 
+                "").replace(' ', BORDER_U_CHAR) + " \n";
+        final String D_BORDER = " " + String.format("%"+(nCols * 2 + 1)+"s", 
+                "").replace(' ', BORDER_D_CHAR) + " \n";
         
         // Borde superior
-        String labyrinth_str = UD_BORDER;
+        String labyrinth_str = U_BORDER;
         
         // Interior del laberinto
         for (int i = 0; i < nRows; i++) {
-            labyrinth_str += BORDER_LR_CHAR + ' ';
-            for (int j = 0; i < nCols; j++) {
+            labyrinth_str += String.valueOf(BORDER_LR_CHAR) + " ";
+            for (int j = 0; j < nCols; j++) {
                 labyrinth_str += (labyrinth[i][j] + " ");
             }
-            labyrinth_str += BORDER_LR_CHAR + '\n';
+            labyrinth_str += String.valueOf(BORDER_LR_CHAR) + "\n";
         }
         
         // Borde inferior
-        labyrinth_str += UD_BORDER;
+        labyrinth_str += D_BORDER;
         
         return labyrinth_str;
     }

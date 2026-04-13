@@ -55,8 +55,6 @@ public class TextUI {
         System.out.println("            IRRGARTEN                   ");
         System.out.println("========================================\n");
 
-        System.out.println(gameState.getLabyrinth());
-
         System.out.println("\n--- JUGADORES ---");
         System.out.println(gameState.getPlayers());
 
@@ -67,6 +65,8 @@ public class TextUI {
 
         System.out.println("\n--- DIARIO DE COMBATE ---");
         System.out.println(gameState.getLog());
+        
+        System.out.println(gameState.getLabyrinth());
 
         if (gameState.getWinner()) {
             System.out.println("\n --- GANADOR --- ");

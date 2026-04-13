@@ -29,9 +29,14 @@ public class Player {
     private int consecutiveHits = 0;
     
     Player(char _number, float _intelligence, float _strength){
+        health = INITIAL_HEALTH;
         number = _number;
         intelligence = _intelligence;
-        strength = _strength;        
+        strength = _strength;   
+        
+        // Initializing ArrayLists
+        weapons = new ArrayList<Weapon>();
+        shields = new ArrayList<Shield>();
     }
     
     public void resurrect(){
@@ -114,10 +119,11 @@ public class Player {
         for(Shield s : shields){
             playerShields += s.toString();
         }
-        
-        return row + "Player Status: " +
+      
+        return "Player Status: " +
                 "\nName: " + name +
                 "\nNumber: " + number + 
+                "\nCurrent Health: " + (dead() ? "DEAD" : health) +
                 "\nIntelligence: " + intelligence +
                 "\nStrength: " + strength +
                 "\nRow: " + row +

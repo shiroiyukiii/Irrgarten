@@ -4,17 +4,20 @@
  */
 package irrgarten;
 
+import irrgarten.UI.TextUI;
+import irrgarten.controller.Controller;
+
 /**
  *
  * @author usuario
  */
 public class TestP1 {
-
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
-        Weapon sword;
+       TextUI view = new TextUI();
+       Game game = new Game(1);
+       Controller controller = new Controller(game, view);
+       controller.play();
     }
     
 }
