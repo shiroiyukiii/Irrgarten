@@ -85,11 +85,11 @@ public class Game {
         String stateLabyrinth = labyrinth.toString();
         String statePlayers = "";
         for (Player p : players){
-            statePlayers += p.toString();
+            statePlayers += p.toString() + '\n';
         }
         String stateMonsters = "";
         for (Monster m : monsters){
-            stateMonsters += m.toString();
+            stateMonsters += m.toString() + " ";
         }
         GameState gs = new GameState(stateLabyrinth, statePlayers, 
                                     stateMonsters, currentPlayerIndex, 
@@ -98,16 +98,25 @@ public class Game {
     }
     
     private void configureLabyrinth(){
-        labyrinth.addBlock(Orientation.VERTICAL, 10, 9, 9);
+        labyrinth.addBlock(Orientation.VERTICAL, 0, 9, 4);
+        labyrinth.addBlock(Orientation.HORIZONTAL, 4, 2, 6);
         
         Monster topologia = new Monster("Topologia", 10.0f, 10.0f); 
         monsters.add(topologia); // El monstruo es T2 (?)
         labyrinth.addMonster(5, 5, topologia);
+        
+        Monster ec = new Monster("EC", Dice.randomIntelligence(), 
+            Dice.randomStrength()); 
+        monsters.add(ec);
+        labyrinth.addMonster(6, 6, ec);
+        
     }
     
     private void nextPlayer(){
-        currentPlayer = players.get(currentPlayerIndex++);
         currentPlayerIndex++;
+        if (currentPlayerIndex >= players.size())
+            currentPlayerIndex = 0;
+        currentPlayer = players.get(currentPlayerIndex);
     }
     
     private Directions actualDirection(Directions preferredDirection){
@@ -197,7 +206,8 @@ public class Game {
     }
     
     private void logRounds(int rounds, int max){
-        log += "Se han producido " + rounds + "rondas en el combate de un maximo de "
-                    + MAX_ROUNDS;
+        log += "Se han producido " + rounds 
+                    + " rondas en el combate de un maximo de " + MAX_ROUNDS 
+                    + ". ";
                 }
 }

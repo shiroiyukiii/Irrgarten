@@ -70,7 +70,10 @@ public class TextUI {
 
         if (gameState.getWinner()) {
             System.out.println("\n --- GANADOR --- ");
-            System.out.println(gameState.getWinner());
+            // System.out.println(gameState.getWinner());
+            System.out.println("¡Gana el jugador " 
+                    + gameState.getCurrentPlayer() + 
+                    "!");
         }
     }
 }

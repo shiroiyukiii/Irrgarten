@@ -105,10 +105,17 @@ public class Labyrinth {
         return putPlayer2D(oldRow, oldCol, newPos[ROW], newPos[COL], player);
     }
     
+    /**
+     * @brief Añade un bloque de paredes desde startRow y startCol de
+     *  longitud length, en la dirección indicada por orientation
+     * @param startCol columna inicial desde la que se añaden bloques
+     * @param startRow fila inicial desde la que se añaden bloques
+     * @param length longitud de la pared de bloques
+    */
     public void addBlock(Orientation orientation, int startRow, 
             int startCol, int length) {
-        int incCol = (orientation == Orientation.VERTICAL ? 1 : 0);
-        int incRow = (orientation == Orientation.VERTICAL ? 0 : 1);
+        int incCol = (orientation == Orientation.VERTICAL ? 0 : 1);
+        int incRow = (orientation == Orientation.VERTICAL ? 1 : 0);
         int row = startRow;
         int col = startCol;
         
@@ -116,7 +123,7 @@ public class Labyrinth {
             labyrinth[row][col] = BLOCK_CHAR;
             length--;
             row += incRow;
-            row += incCol;
+            col += incCol;
         }
     }
     
@@ -140,7 +147,7 @@ public class Labyrinth {
     }
     
     private boolean posOK(int row, int col) {
-        return 0 < row && row < nRows && 0 < col && col < nCols;
+        return 0 <= row && row < nRows && 0 <= col && col < nCols;
     }
     
     private boolean emptyPos(int row, int col) {

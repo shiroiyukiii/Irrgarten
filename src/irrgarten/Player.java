@@ -112,12 +112,12 @@ public class Player {
     public String toString(){
         String playerWeapons = "";
         for (Weapon w : weapons){
-            playerWeapons += w.toString();
+            playerWeapons += w.toString() + " ";
         }
         
         String playerShields = "";
         for(Shield s : shields){
-            playerShields += s.toString();
+            playerShields += s.toString() + " ";
         }
       
         return "Player Status: " +
