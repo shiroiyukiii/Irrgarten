@@ -209,5 +209,5 @@ public class Game {
         log += "Se han producido " + rounds 
                     + " rondas en el combate de un maximo de " + MAX_ROUNDS 
                     + ". ";
-                }
+    }
 }
