@@ -29,10 +29,11 @@ public class Player {
     private int consecutiveHits = 0;
     
     Player(char _number, float _intelligence, float _strength){
-        health = INITIAL_HEALTH;
+        name = String.format("Player %s", _number);
         number = _number;
         intelligence = _intelligence;
-        strength = _strength;   
+        strength = _strength;
+        health = INITIAL_HEALTH;
         
         // Initializing ArrayLists
         weapons = new ArrayList<Weapon>();
