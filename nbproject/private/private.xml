@@ -12,6 +12,10 @@
             <file>file:/home/Víctor/Documents/GitHub/Irrgarten-java/src/irrgarten/Orientation.java</file>
             <file>file:/home/Víctor/Documents/GitHub/Irrgarten-java/src/irrgarten/Labyrinth.java</file>
             <file>file:/home/Víctor/Documents/GitHub/Irrgarten-java/src/irrgarten/Game.java</file>
+            <file>file:/home/Víctor/Documents/GitHub/Irrgarten-java/src/irrgarten/CardDeck.java</file>
+            <file>file:/home/Víctor/Documents/GitHub/Irrgarten-java/src/irrgarten/WeaponCardDeck.java</file>
+            <file>file:/home/Víctor/Documents/GitHub/Irrgarten-java/src/irrgarten/ShieldCardDeck.java</file>
+            <file>file:/home/Víctor/Documents/GitHub/Irrgarten-java/src/irrgarten/LabyrinthCharacter.java</file>
         </group>
     </open-files>
 </project-private>

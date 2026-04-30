@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author usuario
  */
-public class Player {
+public class Player extends LabyrinthCharacter {
     private static final int MAX_WEAPONS = 2;
     private static final int MAX_SHIELDS = 3;
     private static final int INITIAL_HEALTH = 10;
@@ -18,54 +18,39 @@ public class Player {
     
     private ArrayList<Weapon> weapons;
     private ArrayList<Shield> shields;
+    private WeaponCardDeck weaponCardDeck;
+    private ShieldCardDeck shieldCardDeck;
     
-    private String name;
     private char number;
-    private float intelligence;
-    private float strength;
-    private float health;
-    private int row;
-    private int col;
     private int consecutiveHits = 0;
     
     Player(char _number, float _intelligence, float _strength){
-        name = String.format("Player %s", _number);
+        super(String.format("Player %s", _number),  _intelligence, _strength, 
+                INITIAL_HEALTH);
         number = _number;
-        intelligence = _intelligence;
-        strength = _strength;
-        health = INITIAL_HEALTH;
         
         // Initializing ArrayLists
         weapons = new ArrayList<Weapon>();
         shields = new ArrayList<Shield>();
+        weaponCardDeck = new WeaponCardDeck();
+        shieldCardDeck = new ShieldCardDeck();
+    }
+    
+    Player(Player other) {
+        super(other);
+        // A implementar para FuzzyPlayer
+        throw new UnsupportedOperationException();
     }
     
     public void resurrect(){
         weapons.clear();
         shields.clear();
-        health = INITIAL_HEALTH;
+        setHealth(INITIAL_HEALTH);
         consecutiveHits = 0;
-    }
-    
-    public void setPos(int _row, int _col){
-        row = _row;
-        col = _col;
     }
 
     public char getNumber() {
         return number;
-    }
-    
-    public int getRow() {
-        return row;
-    }
-    
-    public int getCol() {
-        return col;
-    }
-    
-    public boolean dead(){
-        return (health <= 0);
     }
     
     public Directions move(Directions direction, ArrayList<Directions> validMoves){
@@ -84,7 +69,7 @@ public class Player {
     }
     
     public float attack(){
-        return strength + sumWeapons();
+        return getStrength() + sumWeapons();
     }
     
     public boolean defend(float receivedAttack){
@@ -96,17 +81,15 @@ public class Player {
         int sReward = Dice.shieldsReward();
         
         for(int i = 0; i<wReward; i++){
-            Weapon wnew = newWeapon();
-            receiveWeapon(wnew);
+            receiveWeapon(weaponCardDeck.nextCard());
         }
         
         for(int i = 0; i<sReward; i++){
-            Shield snew = newShield();
-            receiveShield(snew);
+            receiveShield(shieldCardDeck.nextCard());
         }
-        
+       
         int extraHealth = Dice.healthReward();
-        health += extraHealth;
+        setHealth(getHealth() + extraHealth);
     }
     
     @Override
@@ -122,13 +105,7 @@ public class Player {
         }
       
         return "Player Status: " +
-                "\nName: " + name +
-                "\nNumber: " + number + 
-                "\nCurrent Health: " + (dead() ? "DEAD" : health) +
-                "\nIntelligence: " + intelligence +
-                "\nStrength: " + strength +
-                "\nRow: " + row +
-                "\nCol: " + col + 
+                "\nMain Stats: " + super.toString() +
                 "\nConsecutive Hits: " + consecutiveHits +
                 "\nWeapons: " + playerWeapons + 
                 "\nShields: " + playerShields;
@@ -166,7 +143,7 @@ public class Player {
     }
     
     
-    private float sumWeapons(){
+    protected float sumWeapons(){
         float sum = 0;
         for (int i=0; i<weapons.size(); i++){
             sum += weapons.get(i).attack();
@@ -174,7 +151,7 @@ public class Player {
         return sum;
     }
     
-    private float sumShields(){
+    protected float sumShields(){
         float sum = 0;
         for (int i=0; i<shields.size(); i++){
             sum += shields.get(i).protect();
@@ -182,16 +159,12 @@ public class Player {
         return sum;
     }
     
-    private float defensiveEnergy(){
-        return intelligence + sumShields();
+    protected float defensiveEnergy(){
+        return getIntelligence() + sumShields();
     }
     
     private void resetHits(){
         consecutiveHits = 0;
-    }
-    
-    private void gotWounded(){
-        health--;
     }
     
     private void incConsecutiveHits(){
