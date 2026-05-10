@@ -28,8 +28,13 @@ abstract public class LabyrinthCharacter {
         col = OUT_OF_BOUNDS;
     }
     
-    public LabyrinthCharacter(LabyrinthCharacter _other) {
-        // A implementar para fuzzyPlayer
+    public LabyrinthCharacter(LabyrinthCharacter other) {
+        name =  other.name;
+        intelligence = other.intelligence;
+        strength = other.strength;
+        health = other.health;
+        row = other.row;
+        col = other.col;
     }
     
     public boolean dead() {

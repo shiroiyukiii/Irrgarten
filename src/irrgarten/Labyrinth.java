@@ -105,6 +105,15 @@ public class Labyrinth {
         return putPlayer2D(oldRow, oldCol, newPos[ROW], newPos[COL], player);
     }
     
+    public void updatePlayer(Player oldPlayer, Player newPLayer) {
+        int row = oldPlayer.getRow();
+        int col = oldPlayer.getCol();
+        
+        if (players[row][col] == oldPlayer) {
+            players[row][col] = newPlayer;
+        }
+    }
+    
     /**
      * @brief Añade un bloque de paredes desde startRow y startCol de
      *  longitud length, en la dirección indicada por orientation

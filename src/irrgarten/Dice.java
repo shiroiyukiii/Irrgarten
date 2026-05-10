@@ -5,6 +5,7 @@
 package irrgarten;
 
 import java.util.Random;
+import java.util.ArrayList;
 
 public class Dice {
     static final private int MAX_USES = 5;
@@ -68,6 +69,18 @@ public class Dice {
     
     static public boolean discardElement(int usesLeft) {
         return generator.nextFloat() >= ((float)usesLeft / (float)MAX_USES);
+    }
+    
+    static public Directions nextStep(Directions preference, ArrayList<Directions> validMoves, float intelligence) {
+        Directions direction;
+        
+        if (generator.nextFloat(MAX_INTELLIGENCE) <= intelligence){
+            direction = preference;
+        }
+        
+        else 
+            direction = validMoves.get(generator.nextInt(validMoves.size()));
+        return direction;
     }
  
 }

@@ -38,8 +38,15 @@ public class Player extends LabyrinthCharacter {
     
     Player(Player other) {
         super(other);
-        // A implementar para FuzzyPlayer
-        throw new UnsupportedOperationException();
+        
+        number = other.number;
+        consecutiveHits = other.consecutiveHits;
+        
+        weapons = new ArrayList<>(other.weapons);
+        shields = new ArrayList<>(other.shields);
+        
+        weaponCardDeck = other.weaponCardDeck;
+        shieldCardDeck = other.shieldCardDeck;
     }
     
     public void resurrect(){
