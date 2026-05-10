@@ -174,8 +174,8 @@ public class Game {
             currentPlayer.resurrect();
             
             FuzzyPlayer fuzzyPlayer = new FuzzyPlayer(currentPlayer);
-            int index = players.indexOf(currentPLayer);
-            players.set(index, fuzzy);
+            int index = players.indexOf(currentPlayer);
+            players.set(index, fuzzyPlayer);
             
             labyrinth.updatePlayer(currentPlayer, fuzzyPlayer);
             

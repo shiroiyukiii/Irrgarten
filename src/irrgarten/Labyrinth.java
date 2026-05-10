@@ -105,7 +105,7 @@ public class Labyrinth {
         return putPlayer2D(oldRow, oldCol, newPos[ROW], newPos[COL], player);
     }
     
-    public void updatePlayer(Player oldPlayer, Player newPLayer) {
+    public void updatePlayer(Player oldPlayer, Player newPlayer) {
         int row = oldPlayer.getRow();
         int col = oldPlayer.getCol();
         
