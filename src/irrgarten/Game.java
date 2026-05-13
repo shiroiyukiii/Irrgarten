@@ -67,7 +67,6 @@ public class Game {
                 manageReward(winner);
             }
         }
-        
         else {
             manageResurrection();
         }
@@ -101,7 +100,7 @@ public class Game {
         labyrinth.addBlock(Orientation.VERTICAL, 0, 9, 4);
         labyrinth.addBlock(Orientation.HORIZONTAL, 4, 2, 6);
         
-        Monster topologia = new Monster("Topologia", 10.0f, 10.0f); 
+        Monster topologia = new Monster("Topologia", 100.0f, 100.0f); 
         monsters.add(topologia); // El monstruo es T2 (?)
         labyrinth.addMonster(5, 5, topologia);
         
