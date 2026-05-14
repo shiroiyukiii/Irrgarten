@@ -4,7 +4,7 @@
  */
 package irrgarten;
 
-import irrgarten.UI.TextUI;
+import irrgarten.UI.MainWindow;
 import irrgarten.controller.Controller;
 
 /**
@@ -14,7 +14,7 @@ import irrgarten.controller.Controller;
 public class TestP1 {
     
     public static void main(String[] args) {
-       TextUI view = new TextUI();
+       MainWindow view = new MainWindow();
        Game game = new Game(2);
        Controller controller = new Controller(game, view);
        controller.play();

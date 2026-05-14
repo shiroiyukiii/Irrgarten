@@ -2,7 +2,6 @@ package irrgarten.UI;
 
 import irrgarten.Directions;
 import irrgarten.GameState;
-import irrgarten.Cursors;
 
 /**
  *
@@ -23,7 +22,7 @@ public class MainWindow extends javax.swing.JFrame implements UI{
     public Directions nextMove() {
         c = new Cursors(this, true);
         
-        c.getDirection();
+        return c.getDirection();
     }
     
     @Override 
