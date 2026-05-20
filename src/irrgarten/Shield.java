@@ -4,10 +4,7 @@
  */
 package irrgarten;
 
-/**
- *
- * @author usuario
- */
+
 public class Shield extends CombatElement {
     Shield(float _protection, int _uses) {
         super(_protection, _uses);

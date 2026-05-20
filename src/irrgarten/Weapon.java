@@ -1,9 +1,5 @@
 package irrgarten;
 
-/**
- *
- * @author usuario
- */
 public class Weapon extends CombatElement {  
     Weapon(float _power, int _uses) {
        super(_power, _uses);

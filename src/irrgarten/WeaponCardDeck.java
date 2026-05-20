@@ -4,10 +4,6 @@
  */
 package irrgarten;
 
-/**
- *
- * @author Víctor
- */
 public class WeaponCardDeck extends CardDeck<Weapon> {
     
     @Override

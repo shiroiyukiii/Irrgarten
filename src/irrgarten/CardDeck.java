@@ -7,10 +7,6 @@ package irrgarten;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- *
- * @author Víctor
- */
 abstract public class CardDeck<T extends CombatElement> {
     private ArrayList<T> cardDeck;
     protected static final int STARTING_CARDS = 10;

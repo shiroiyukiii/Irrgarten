@@ -6,10 +6,6 @@ package irrgarten;
 
 import java.util.Collections;
 
-/**
- *
- * @author Víctor
- */
 public class ShieldCardDeck extends CardDeck<Shield> {
     
     @Override

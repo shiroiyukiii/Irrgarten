@@ -7,10 +7,7 @@ package irrgarten;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- *
- * @author Víctor
- */
+
 public class Labyrinth {
     static private final char BLOCK_CHAR = 'X';
     static private final char EMPTY_CHAR = '-';

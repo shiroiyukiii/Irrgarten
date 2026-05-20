@@ -4,10 +4,7 @@
  */
 package irrgarten;
 
-/**
- *
- * @author Víctor
- */
+
 abstract public class LabyrinthCharacter {
     private static final int OUT_OF_BOUNDS = -1;
     private String name;

@@ -6,10 +6,7 @@ package irrgarten;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author usuario
- */
+
 public class Player extends LabyrinthCharacter {
     private static final int MAX_WEAPONS = 2;
     private static final int MAX_SHIELDS = 3;

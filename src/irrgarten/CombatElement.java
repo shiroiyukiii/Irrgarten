@@ -4,10 +4,7 @@
  */
 package irrgarten;
 
-/**
- *
- * @author Víctor
- */
+
 abstract public class CombatElement {
     private float effect;
     private int uses;

@@ -6,10 +6,7 @@ package irrgarten;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author usuario
- */
+
 public class FuzzyPlayer extends Player {
     
     public FuzzyPlayer(Player other) {

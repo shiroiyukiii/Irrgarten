@@ -5,10 +5,7 @@
 package irrgarten.UI;
 import irrgarten.Directions;
 
-/**
- *
- * @author Víctor
- */
+
 public class Cursors extends javax.swing.JDialog {
     private Directions direction;
     /**

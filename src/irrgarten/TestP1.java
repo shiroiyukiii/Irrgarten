@@ -7,10 +7,6 @@ package irrgarten;
 import irrgarten.UI.MainWindow;
 import irrgarten.controller.Controller;
 
-/**
- *
- * @author usuario
- */
 public class TestP1 {
     
     public static void main(String[] args) {

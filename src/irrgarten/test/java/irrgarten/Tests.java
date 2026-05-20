@@ -6,10 +6,8 @@ package irrgarten.test.java.irrgarten;
 
 import irrgarten.Dice;
 import irrgarten.Monster;
-/**
- *
- * @author Víctor
- */
+
+
 public class Tests {
     static String monsterTests() {
         float intelligence = Dice.randomIntelligence();

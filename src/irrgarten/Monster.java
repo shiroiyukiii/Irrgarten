@@ -4,10 +4,7 @@
  */
 package irrgarten;
 
-/**
- *
- * @author Víctor
- */
+
 public class Monster extends LabyrinthCharacter {
     private static final int INITIAL_HEALTH = 5;
     

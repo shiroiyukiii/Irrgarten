@@ -4,10 +4,7 @@
  */
 package irrgarten;
 
-/**
- *
- * @author usuario
- */
+
 public class GameState {
     private String labyrinth;
     private String players;
