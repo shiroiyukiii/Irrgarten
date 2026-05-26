@@ -127,7 +127,7 @@ public class Player extends LabyrinthCharacter {
     }
     
     private void receiveShield(Shield s){
-        weapons.removeIf(si -> si.discard());
+        shields.removeIf(si -> si.discard());
         
         int size = shields.size();
         
